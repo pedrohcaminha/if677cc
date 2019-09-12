@@ -12,10 +12,10 @@ void *regiao(void *arg)
     
     int *ptr = (int *)arg;
     int id = *ptr;
-    /* Usando o LOCK, conseguimos garantir que a thread em execucao acessara a regiao critica
+    /* Usando o TRYLOCK, conseguimos garantir que a thread em execucao acessara a regiao critica
      * e excluira outras de acessarem ate que ela seja finalizada. Ao final, sempre devemos
      * liberar a regiao com o UNLOCK */
-    pthread_mutex_lock(&mutex);
+    pthread_mutex_trylock(&mutex);
     printf("Thread %d entrando na região crítica...\n", id);
     sleep(2);
     printf("Thread %d finalizada!\n", id);
